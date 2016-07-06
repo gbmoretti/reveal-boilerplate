@@ -3,6 +3,18 @@
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var browserSync = require('browser-sync');
+var sass = require('gulp-sass');
+var cssmin = require('gulp-cssmin');
+var sourcemaps = require('gulp-sourcemaps');
+
+gulp.task('sass', function () {
+  return gulp.src('./styles/**/*.scss')
+    .pipe(sourcemaps.init())
+    .pipe(sass().on('error', sass.logError))
+    .pipe(cssmin())
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest('./build'));
+});
 
 gulp.task('serve', function () {
   browserSync({
@@ -16,8 +28,8 @@ gulp.task('serve', function () {
   gulp.watch([
     'index.html',
     'slides/*',
-    'css/*'
-  ])
+    'styles/**/*.scss'
+  ], ['sass'])
   .on('change', browserSync.reload);
 });
 
@@ -25,7 +37,7 @@ gulp.task('deploy', function () {
   return gulp.src([
     'index.html',
     'slides/*',
-    'css/*',
+    'build/*',
     'node_modules/reveal.js/**',
     'hotfix/**'
   ], {
@@ -34,4 +46,4 @@ gulp.task('deploy', function () {
   .pipe($.ghPages());
 });
 
-gulp.task('default', ['serve']);
+gulp.task('default', ['sass', 'serve']);
