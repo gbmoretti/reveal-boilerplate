@@ -1,11 +1,15 @@
 {
   "private": true,
+  "scripts": {
+    "start": "gulp serve",
+    "deploy": "gulp deploy"
+  },
   "devDependencies": {
     "browser-sync": "^2.7.13",
     "gulp": "^3.9.0",
     "gulp-cssmin": "^0.1.7",
     "gulp-gh-pages": "^0.5.2",
-    "gulp-load-plugins": "^0.10.0",
+    "gulp-load-plugins": "^1.2.4",
     "gulp-sass": "^2.3.2",
     "gulp-sourcemaps": "^1.6.0"
   },

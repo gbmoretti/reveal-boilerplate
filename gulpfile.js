@@ -23,14 +23,13 @@ gulp.task('serve', function () {
     server: {
       baseDir: ['.']
     },
+    files: [
+      'index.html',
+      'slides/*',
+      'styles/**/*.scss'
+    ],
     ui: false
   });
-  gulp.watch([
-    'index.html',
-    'slides/*',
-    'styles/**/*.scss'
-  ], ['sass'])
-  .on('change', browserSync.reload);
 });
 
 gulp.task('deploy', function () {
@@ -38,8 +37,7 @@ gulp.task('deploy', function () {
     'index.html',
     'slides/*',
     'build/*',
-    'node_modules/reveal.js/**',
-    'hotfix/**'
+    'node_modules/reveal.js/**'
   ], {
     base: '.'
   })
